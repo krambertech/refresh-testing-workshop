@@ -9,10 +9,6 @@
  */
 
 export default function calculator(operation, a, b) {
-  if (typeof a !== "number" || typeof b !== "number") {
-    throw new Error("Invalid input, expected 2 numbers");
-  }
-
   if (operation === "add") {
     return a + b;
   }

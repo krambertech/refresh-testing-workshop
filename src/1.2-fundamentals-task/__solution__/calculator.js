@@ -5,7 +5,7 @@
  *   "add", 2, 4 -> 6
  *   "subtract", 10, 5 -> 5
  *
- * It throws error if operation is invalid
+ * It throws error if operation is invalid or input is not a number
  */
 
 export default function calculator(operation, a, b) {
