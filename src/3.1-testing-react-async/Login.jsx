@@ -10,8 +10,8 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     setStatus("loading");
+    e.preventDefault();
 
     try {
       await logIn({ password });

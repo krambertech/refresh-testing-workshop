@@ -1,11 +1,11 @@
 export async function logIn({ password }) {
-  return new Promise(
-    (resolve, reject) =>
-      setTimeout(() =>
+  return new Promise((resolve, reject) =>
+    setTimeout(
+      () =>
         password === "password"
           ? resolve({ success: true })
-          : reject({ success: false })
-      ),
-    400
+          : reject({ success: false }),
+      400
+    )
   );
 }

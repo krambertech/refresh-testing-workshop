@@ -16,18 +16,24 @@ const setup = (ui) => ({
 });
 
 test("allows to log in with correct password", async () => {
-  mockLogIn.mockResolvedValueOnce({ success: true });
+  mockLogIn.mockImplementationOnce(
+    () =>
+      new Promise((resolve) => setTimeout(() => resolve({ success: true }), 0))
+  );
+
+  //mockLogIn.mockResolvedValue({ success: true });
 
   const { user } = setup(<Login />);
 
   const passwordInput = screen.getByLabelText(/password/i);
-  await user.type(passwordInput, "password{enter}");
+  await user.type(passwordInput, "password");
+  await user.click(screen.getByRole("button", { name: /log in/i }));
 
   // option 1
-  const successMessage = await screen.findByRole("heading", {
-    name: /you are logged in/i,
-  });
-  expect(successMessage).toBeInTheDocument();
+  // const successMessage = await screen.findByRole("heading", {
+  //   name: /you are logged in/i,
+  // });
+  // expect(successMessage).toBeInTheDocument();
 
   // option 2
   // await waitFor(() => expect(mockLogIn).toBeCalledTimes(1));
@@ -36,10 +42,12 @@ test("allows to log in with correct password", async () => {
   // ).toBeInTheDocument();
 
   // option 3
-  // await waitForElementToBeRemoved(screen.queryByText(/logging in/i));
-  // expect(
-  //   screen.getByRole("heading", { name: /you are logged in/i })
-  // ).toBeInTheDocument();
+  const loadingMessage = await screen.findByText(/logging in/i);
+  await waitForElementToBeRemoved(loadingMessage);
+
+  expect(
+    screen.getByRole("heading", { name: /you are logged in/i })
+  ).toBeInTheDocument();
 
   expect(mockLogIn).toBeCalledWith({ password: "password" });
 });
