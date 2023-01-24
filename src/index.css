@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+  color: #F0FFFA;
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  outline-color: #F12FFF;
+}
+
+::placeholder {
+  color: rgba(240, 255, 250, 0.7);
+}
+
+a {
+  color: #F12FFF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+label {
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; 
+  font-size: inherit; 
+  line-height: 1.2;
+  border: 2px solid #14E5C5;
+  padding: 4px 8px;
+  margin: 4px;
+  border-radius: 2px;
+  
+  color: #F0FFFA;
+}
+
+input,
+optgroup,
+select,
+textarea {
+  background: transparent;
+}
+
+button {
+  font-weight: bold;
+  background: #11615C;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #14E5C5;
+  color: #03282C;
+}
+
+button[aria-pressed="true"] {
+  background: #14E5C5;
+  color: #03282C;
+}
+
+button:disabled,
+input:disabled,
+optgroup:disabled,
+select:disabled,
+textarea:disabled {
+  border: 2px solid #11615C;
+  background: #03282C;
+  color: #88978F;
+}
+
+blockquote {
+  border-left: 4px solid #14E5C5;
+  margin: 16px 0;
+  padding: 8px 24px;
+}

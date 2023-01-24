@@ -1,0 +1,16 @@
+.App {
+  background-color: #03282C;
+  min-height: 100vh;
+  color: #F0FFFA;
+  font-size: 18px;
+}
+
+.App-main {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.App-content {
+  padding: 48px;
+}
+
