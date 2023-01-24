@@ -14,6 +14,7 @@ function QuoteGenerator() {
   const [quoteCategory, setQuoteCategory] = useState("");
   const [quote, setQuote] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChangeCategory = (e) => {
     setQuoteCategory(e.target.value);
@@ -23,10 +24,15 @@ function QuoteGenerator() {
     e.preventDefault();
     setIsLoading(true);
 
-    const quote = await fetchRandomQuote({
-      category: quoteCategory === "all" ? null : quoteCategory,
-    });
-    setQuote(quote);
+    try {
+      const quote = await fetchRandomQuote({
+        category: quoteCategory === "all" ? null : quoteCategory,
+      });
+      setQuote(quote);
+      setError(null);
+    } catch (err) {
+      setError(err);
+    }
 
     setIsLoading(false);
   };
@@ -53,6 +59,8 @@ function QuoteGenerator() {
 
       {isLoading ? (
         <p role="status">🌍 Loading...</p>
+      ) : error ? (
+        <p role="alert">❌ Something went wrong: {error?.message}</p>
       ) : quote ? (
         <blockquote>
           <p>{quote.content}</p>

@@ -1,22 +1,29 @@
 /**
- * 👉 TASK: Write tests for the QuoteGenerator component
- *
- * Now let's practice mocking when testing with this QuoteGenerator component
+ * 👉 TASK 3:
+ * Write tests for the QuoteGenerator component. Note that it uses external API
+ * for fetching quotes that you would need to mock in tests
  *
  * Run tests with:
  * > npm test QuoteGenerator
  */
 
 import { render, screen } from "@testing-library/react";
-// import userEvent from "@testing-library/user-event";
-// import { fetchRandomQuote as mockFetchRandomQuote } from "./api";
+import userEvent from "@testing-library/user-event";
+import { fetchRandomQuote as mockFetchRandomQuote } from "./api";
 
 import QuoteGenerator from "./QuoteGenerator";
 
 // To mock API module:
-// jest.mock("./api");
+jest.mock("./api");
+
+// Use this function in your tests
+const setup = (ui) => ({
+  user: userEvent.setup(),
+  ...render(ui),
+});
 
 /**
+ * 3.1
  * Write a test that it fetches and displays a random quote
  * from API. Make sure to check that loading indication is shown while loading
  *
@@ -28,7 +35,7 @@ import QuoteGenerator from "./QuoteGenerator";
  * - To wait until loading finishes you have a few strategies, read more about them
  *   [here](https://testing-library.com/docs/dom-testing-library/api-async#waitfor)
  */
-test("fetches and displays a random quote from API", () => {
+test("fetches and displays a random quote from API", async () => {
   const mockedQuote = {
     _id: "HBLejCmmWoIy",
     author: "John Snow",
@@ -39,14 +46,11 @@ test("fetches and displays a random quote from API", () => {
     dateModified: "2020-01-01",
   };
 
-  render(<QuoteGenerator />);
-
-  expect(screen.getByRole("heading")).toHaveTextContent(/random quote/i);
-
-  // TODO: write rest of the test here
+  // write test here
 });
 
 /**
+ * 3.2
  * Here you need to check that it allows to select category to user
  * and then  passes it to the API
  *
@@ -58,7 +62,7 @@ test("fetches and displays a random quote from API", () => {
 test.todo("allows to select category and displays quote");
 
 /**
- * 🚀 BONUS (TDD)
+ * 3.3 🚀 BONUS (TDD)
  * Currently `QuoteGenerator` component does not display an error state. Add a test case
  * that checks that it displays an error message when API call fails
  * and then implement the feature inside the component
@@ -66,10 +70,10 @@ test.todo("allows to select category and displays quote");
  * 💡 Tips:
  * - Use `.mockRejectedValueOnce` to mock API call failure (rejected promise)
  */
-// test.todo("displays an error message when API call fails");
+test.todo("displays an error message when API call fails");
 
 /**
- * 🚀 BONUS
+ * 3.4 🚀 BONUS
  * Create a `mockQuote` function
  *
  * You might have noticed that we often need to write the same code to mock a quote.
@@ -81,4 +85,4 @@ test.todo("allows to select category and displays quote");
  *
  * Then use it in your tests to simplify mocking
  */
-// function mockQuote(overrides) {}
+// const mockQuote = (overrides) => ();
