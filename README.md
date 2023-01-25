@@ -1,4 +1,4 @@
-# 🔍 Testing React Aplications
+# 🔍 Introduction to testing JavaScript and React
 
 This a workshop that covers the basics of testing JavaScript and React at [Refresh conference](https://refresh.rocks/). 
 
