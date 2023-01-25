@@ -6,10 +6,11 @@
  * > npm test Counter
  * */
 
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+// 👇 You can uncomment imports once you start working
+// import { render, screen } from "@testing-library/react";
+// import userEvent from "@testing-library/user-event";
 
-import Counter from "./Counter";
+// import Counter from "./Counter";
 
 /**
  * 2.1

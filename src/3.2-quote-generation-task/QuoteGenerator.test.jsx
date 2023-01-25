@@ -7,20 +7,21 @@
  * > npm test QuoteGenerator
  */
 
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { fetchRandomQuote as mockFetchRandomQuote } from "./api";
+// 👇 You can uncomment imports once you start working
+// import { render, screen } from "@testing-library/react";
+// import userEvent from "@testing-library/user-event";
+// import { fetchRandomQuote as mockFetchRandomQuote } from "./api";
 
-import QuoteGenerator from "./QuoteGenerator";
+// import QuoteGenerator from "./QuoteGenerator";
 
-// To mock API module:
-jest.mock("./api");
+// 👇 To mock API module:
+// jest.mock("./api");
 
-// Use this function in your tests
-const setup = (ui) => ({
-  user: userEvent.setup(),
-  ...render(ui),
-});
+// 👇 You can use this function in your tests
+// const setup = (ui) => ({
+//   user: userEvent.setup(),
+//   ...render(ui),
+// });
 
 /**
  * 3.1
@@ -36,17 +37,16 @@ const setup = (ui) => ({
  *   [here](https://testing-library.com/docs/dom-testing-library/api-async#waitfor)
  */
 test("fetches and displays a random quote from API", async () => {
-  const mockedQuote = {
-    _id: "HBLejCmmWoIy",
-    author: "John Snow",
-    content: "Don't call me Lord Snow",
-    length: 80,
-    tags: [],
-    dateAdded: "2020-01-01",
-    dateModified: "2020-01-01",
-  };
-
-  // write test here
+  // 👇 Example of the quote object
+  // const mockedQuote = {
+  //   _id: "HBLejCmmWoIy",
+  //   author: "John Snow",
+  //   content: "Don't call me Lord Snow",
+  //   length: 80,
+  //   tags: [],
+  //   dateAdded: "2020-01-01",
+  //   dateModified: "2020-01-01",
+  // };
 });
 
 /**

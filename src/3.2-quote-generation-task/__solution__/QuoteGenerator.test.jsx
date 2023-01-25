@@ -163,3 +163,28 @@ const mockQuote = (overrides = {}) => ({
   dateModified: "2020-01-01",
   ...overrides,
 });
+
+// example test to show how mockQuote can be used
+test("[mockQuote] dummy test with mockQuote", async () => {
+  const mockedQuote = mockQuote({
+    content: "Don't call me Lord Snow",
+    author: "John Snow",
+  });
+  mockFetchRandomQuote.mockResolvedValueOnce(mockedQuote);
+
+  const { user } = setup(<QuoteGenerator />);
+
+  const generateButton = screen.getByRole("button", {
+    name: /generate a random quote/i,
+  });
+  await user.click(generateButton);
+
+  await waitFor(() => expect(mockFetchRandomQuote).toHaveBeenCalled());
+
+  // check quote is rendered
+  expect(screen.getByText(mockedQuote.content)).toBeInTheDocument();
+  expect(screen.getByText(mockedQuote.author)).toBeInTheDocument();
+
+  // check API called correctly
+  expect(mockFetchRandomQuote).toBeCalledTimes(1);
+});

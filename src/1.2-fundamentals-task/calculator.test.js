@@ -9,8 +9,8 @@
  * Run your tests with:
  * > npm test calculator
  */
-
-import calculator from "./calculator";
+// 👇 You can uncomment import once you start working
+// import calculator from "./calculator";
 
 /**
  * 1.1.
@@ -54,5 +54,3 @@ test.todo("multiplies numbers");
  * calculator("add", [], "2") -> Error
  */
 test.todo("throws error when input is not a number");
-
-// Good luck 🍀

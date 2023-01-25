@@ -78,5 +78,3 @@ test("throws error when input is not a number", () => {
   expect(() => calculator("add", 0, [])).toThrow(/invalid input/i);
   expect(() => calculator("add", "string", 2)).toThrow(/invalid input/i);
 });
-
-// Good luck 🍀
