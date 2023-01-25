@@ -5,7 +5,7 @@ export default function Header() {
     <header className="Header">
       <h1>React Testing Workshop</h1>
       <div>
-        <a href="https://github.com/krambertech/react-testing-workshop">
+        <a href="https://github.com/krambertech/refresh-testing-workshop">
           GitHub
         </a>
       </div>
