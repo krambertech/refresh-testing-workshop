@@ -10,15 +10,11 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
-    setStatus("loading");
     e.preventDefault();
+    setStatus("loading");
 
-    try {
-      await logIn({ password });
-      setStatus("success");
-    } catch {
-      setStatus("failure");
-    }
+    await logIn({ password });
+    setStatus("success");
 
     setPassword("");
   };
@@ -41,9 +37,6 @@ export default function Login() {
             🔒 Log in
           </button>
           {status === "loading" ? <p role="status">Logging in...</p> : null}
-          {status === "failure" ? (
-            <p role="alert">Log in failed, try a different password</p>
-          ) : null}
         </form>
       )}
     </div>
