@@ -11,7 +11,12 @@ export default function WordChecker({ minLength = 3, maxLength = 7 }) {
     <div>
       <h3>Check the word</h3>
       <label htmlFor="word">Enter a word</label>
-      <input id="word" value={word} onChange={handleChange} />
+      <input
+        id="word"
+        value={word}
+        //onFocus={() => console.log("👉 focus")}
+        onChange={handleChange}
+      />
       {word.length <= maxLength && word.length >= minLength ? (
         <p role="alert">👌 Good word!</p>
       ) : (
