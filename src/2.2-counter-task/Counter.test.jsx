@@ -7,10 +7,10 @@
  * */
 
 // 👇 You can uncomment imports once you start working
-// import { render, screen } from "@testing-library/react";
-// import userEvent from "@testing-library/user-event";
+import {render, screen} from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-// import Counter from "./Counter";
+import Counter from "./Counter";
 
 /**
  * 2.1
@@ -23,12 +23,19 @@
  * - To access counter's value you can use `getByText(/count: X/i)` query or (alternatively) you
  *   can setup a testId and match by testId
  */
-test.todo("renders with initial value 0 and increment and decrement buttons");
-
+test("renders with initial value 0 and increment and decrement buttons", () => {
+    render(<Counter/>);
+    const counter = screen.getByText(/count:/i);
+    const increment = screen.getByRole("button", {name: /increment/i});
+    const decrement = screen.getByRole("button", {name: /decrement/i});
+    expect(counter).toHaveTextContent(/count: 0/i);
+    expect(increment).toBeInTheDocument();
+    expect(decrement).toBeInTheDocument();
+})
 /**
  * 2.2
  * Write a test to check that Counter allows to increment and decrement value.
- * The flow would be: render component, check initail value, click increment or
+ * The flow would be: render component, check in tail value, click increment or
  * decrement buttons and check that the value is correct afterwards
  *
  * You may create `setup` helper function as we did in the example with WordChecker
@@ -38,7 +45,16 @@ test.todo("renders with initial value 0 and increment and decrement buttons");
  *   userEvent.setup() first
  * - Don't forget to add async to your test function (same as we did in the example)
  */
-test.todo("allows increment and decrement");
+test("allows increment and decrement", async () => {
+    render(<Counter/>);
+    const counter = screen.getByText(/count:/i);
+    const increment = screen.getByRole('button', {name: 'increment'});
+    const decrement = screen.getByRole('button', {name: 'decrement'});
+    await userEvent.click(increment);
+    expect(counter).toHaveTextContent(/count: 1/i);
+    await userEvent.click(decrement);
+    expect(counter).toHaveTextContent(/count: 0/i);
+});
 
 /**
  * 2.3 🚀 BONUS (TDD)
@@ -47,7 +63,12 @@ test.todo("allows increment and decrement");
  * Example:
  * <Counter initialValue={3} />
  */
-test.todo("allows to set initial value");
+test("allows to set initial value", async () => {
+    const initialValue = 12;
+    render(<Counter initialValue={initialValue}/>);
+    const counter = screen.getByText(/count:/i);
+    expect(counter).toHaveTextContent(new RegExp( `count: ${initialValue}`, 'i') );
+});
 
 /**
  * 2.4 🚀 BONUS (TDD)
@@ -66,4 +87,22 @@ test.todo("allows to set initial value");
  * - To check if button is disabled use `toBeDisabled()` matcher
  * - To check if button is enabled use `toBeEnabled()` matcher
  */
-test.todo("does not allow to go below min and above max");
+test("Does not allow to go below min and above max", async () => {
+    const maxValue = 12;
+    const minValue = 0;
+    render(<Counter min={minValue} max={maxValue}/>);
+    const counter = screen.getByText(/count:/i);
+    const increment = screen.getByRole('button', {name: 'increment'});
+    const decrement = screen.getByRole('button', {name: 'decrement'});
+    expect(counter).toHaveTextContent(new RegExp(`count: ${minValue}`, 'i'));
+    expect(decrement).toBeDisabled();
+    expect(increment).toBeEnabled();
+
+    for (let i = 0; i <= maxValue; i++) {
+        await userEvent.click(increment);
+    }
+    expect(counter).toHaveTextContent(new RegExp(`count: ${maxValue}`, 'i'))
+
+    expect(increment).toBeDisabled();
+    expect(decrement).toBeEnabled();
+});
